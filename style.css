@@ -22,6 +22,8 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .wordmark, .eyebrow { letter-spacing: .14em; font-size: .75rem; text-transform: uppercase; }
 .wordmark { text-decoration: none; font-weight: bold; }
 .nav-links { display: flex; flex-wrap: wrap; gap: .8rem 1.1rem; }
+.nav-links a { text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; }
+.nav-links a:hover, .nav-links a:focus-visible { border-bottom-color: var(--muted); }
 .nav-links a { color: var(--muted); font-size: .95rem; text-underline-offset: .25em; }
 .hero { display: grid; gap: 3rem; padding-block: 5rem 5.5rem; text-align: center; }
 .eyebrow { margin: 0 0 1rem; color: var(--sea); }
@@ -39,7 +41,8 @@ h2 { margin-bottom: 1.75rem; font-size: clamp(2.2rem, 9vw, 3.6rem); text-align: 
 .button:disabled { cursor: wait; opacity: .7; }
 .cover-wrap { width: min(100%, 17rem); margin-inline: auto; }
 .cover-placeholder, #book-cover { width: 100%; aspect-ratio: 2 / 3; border: 1px solid var(--rule); }
-.cover-placeholder { display: grid; place-items: center; padding: 1.5rem; color: var(--muted); font-size: .78rem; letter-spacing: .12em; line-height: 1.4; text-transform: uppercase; }
+.cover-wrap { aspect-ratio: 2 / 3; max-height: 26rem; }
+.cover-placeholder { display: grid; place-items: center; height: 100%; padding: 1.5rem; color: var(--muted); font-size: .78rem; letter-spacing: .12em; line-height: 1.4; text-transform: uppercase; }
 #book-cover { display: block; object-fit: cover; }
 .section { border-top: 1px solid var(--rule); padding-block: 5rem; }
 .prose p, .newsletter > p { margin-bottom: 1.4rem; }
