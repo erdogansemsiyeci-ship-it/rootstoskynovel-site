@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Roots to Sky, a novel by Erdoğan Şemsiyeci.">
+    <title>Roots to Sky — Erdoğan Şemsiyeci</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav shell" aria-label="Primary navigation">
+        <a class="wordmark" href="#top">ROOTS TO SKY</a>
+        <div class="nav-links">
+          <a href="#book">The Book</a>
+          <a href="#author">Author</a>
+          <a href="#newsletter">Newsletter</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero shell" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">A novel</p>
+          <h1 id="page-title">Roots to Sky</h1>
+          <p class="subtitle">When the Soul Remembers</p>
+          <p class="author-name">Erdoğan Şemsiyeci</p>
+          <p class="status">Pre-order opens 23 October 2026 · Publication 24 November 2026</p>
+          <p class="hook">Elena has spent her whole life perfecting a woman the world admires and cannot afford to be.</p>
+          <div class="actions" aria-label="Book links">
+            <a class="button" href="#newsletter">Keep me posted</a>
+            <a class="button" id="preorder-link" href="%%AMAZON_URL%%" hidden>Pre-order</a>
+            <a class="button" id="goodreads-link" href="%%GOODREADS_URL%%" hidden>Goodreads</a>
+          </div>
+        </div>
+        <div class="cover-wrap">
+          <div class="cover-placeholder" id="cover-placeholder" aria-hidden="true">Cover reveal coming soon</div>
+          <img id="book-cover" src="assets/cover.jpg" alt="Roots to Sky — cover" hidden>
+        </div>
+      </section>
+
+      <section class="section shell prose" id="book" aria-labelledby="book-title">
+        <p class="eyebrow">The Book</p>
+        <h2 id="book-title">Roots to Sky</h2>
+        <p>By any measure, Elena has escaped: the airless childhood house, the mother whose love arrived as accusation, the old country no one would name. None of her answers explain why a woman who commands any room goes cold at the touch of the man she trusts.</p>
+        <p>When Julian stops waiting on the other side of the table, Elena does what she has avoided all her life: she goes east. From the wet stone and ferry smoke of Istanbul to a half-empty village in the Black Sea mountains, down to a cove on the Aegean where the water goes quiet, she follows the fear back to the woman it was born in — before the same silence reaches the lives that come after her.</p>
+        <p><em>Roots to Sky</em> is a novel of salt, coffee, and what the soul remembers when the mind refuses — a woman putting down a weight she carried so long she stopped naming it.</p>
+      </section>
+
+      <section class="section shell prose" id="author" aria-labelledby="author-title">
+        <p class="eyebrow">Author</p>
+        <h2 id="author-title">Erdoğan Şemsiyeci</h2>
+        <p>Erdoğan Şemsiyeci is a psychological counselor and family constellation practitioner living and working in Turkey. In his work he accompanies people as they trace the quiet inheritances that shape their lives. <em>Roots to Sky</em>, his novel published in English, grows from that same ground, exploring intergenerational trauma, family legacy and the long, patient work of healing.</p>
+      </section>
+
+      <section class="section shell newsletter" id="newsletter" aria-labelledby="newsletter-title">
+        <p class="eyebrow">Newsletter</p>
+        <h2 id="newsletter-title">Be told when it is out</h2>
+        <p>One short email when the book is published, and nothing else. No newsletters, no offers.</p>
+        <form id="newsletter-form" novalidate>
+          <div class="honeypot" aria-hidden="true">
+            <label for="website">Leave this field empty</label>
+            <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="consent">
+            <input id="consent" name="consent" type="checkbox" required>
+            <label for="consent">I agree to receive one email about this book's publication.</label>
+          </div>
+          <button class="button" type="submit">Keep me posted</button>
+          <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <p>© 2026 Erdoğan Şemsiyeci · Roots to Sky · When the Soul Remembers</p>
+        <p>rootstoskynovel.com</p>
+      </div>
+    </footer>
+    <script src="site.js"></script>
+  </body>
+</html>

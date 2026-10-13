@@ -1,0 +1,66 @@
+:root {
+  --ink: #14110F;
+  --paper: #F2EBDD;
+  --muted: #C9BFAE;
+  --brick: #B4453A;
+  --sea: #3E8C93;
+  --rule: #3A342D;
+  font-family: "EB Garamond", Garamond, Georgia, "Times New Roman", serif;
+  color: var(--paper);
+  background: var(--ink);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--ink); color: var(--paper); font-size: 1.125rem; line-height: 1.55; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--sea); outline-offset: 4px; }
+.shell { width: min(100% - 2.5rem, 68ch); margin-inline: auto; }
+.site-header { border-bottom: 1px solid var(--rule); }
+.nav { min-height: 4.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem 1.5rem; padding-block: 1rem; }
+.wordmark, .eyebrow { letter-spacing: .14em; font-size: .75rem; text-transform: uppercase; }
+.wordmark { text-decoration: none; font-weight: bold; }
+.nav-links { display: flex; flex-wrap: wrap; gap: .8rem 1.1rem; }
+.nav-links a { color: var(--muted); font-size: .95rem; text-underline-offset: .25em; }
+.hero { display: grid; gap: 3rem; padding-block: 5rem 5.5rem; text-align: center; }
+.eyebrow { margin: 0 0 1rem; color: var(--sea); }
+h1, h2, p { margin-top: 0; }
+h1, h2 { font-weight: normal; line-height: 1.05; }
+h1 { margin-bottom: .25rem; font-size: clamp(3.3rem, 15vw, 6.4rem); }
+h2 { margin-bottom: 1.75rem; font-size: clamp(2.2rem, 9vw, 3.6rem); text-align: center; }
+.subtitle { margin-bottom: 1.5rem; color: var(--muted); font-size: clamp(1.35rem, 5vw, 1.8rem); font-style: italic; }
+.author-name { margin-bottom: 2.5rem; font-size: 1.2rem; }
+.status { margin-inline: auto; max-width: 35rem; color: var(--muted); font-size: .98rem; }
+.hook { max-width: 34rem; margin: 2.5rem auto; font-size: clamp(1.4rem, 5vw, 1.8rem); line-height: 1.32; }
+.actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; }
+.button { display: inline-block; border: 1px solid var(--muted); padding: .65rem 1.05rem; background: transparent; color: var(--paper); font: inherit; line-height: 1.2; cursor: pointer; text-decoration: none; transition: background-color .18s ease, border-color .18s ease; }
+.button:hover { border-color: var(--brick); background: var(--brick); }
+.button:disabled { cursor: wait; opacity: .7; }
+.cover-wrap { width: min(100%, 17rem); margin-inline: auto; }
+.cover-placeholder, #book-cover { width: 100%; aspect-ratio: 2 / 3; border: 1px solid var(--rule); }
+.cover-placeholder { display: grid; place-items: center; padding: 1.5rem; color: var(--muted); font-size: .78rem; letter-spacing: .12em; line-height: 1.4; text-transform: uppercase; }
+#book-cover { display: block; object-fit: cover; }
+.section { border-top: 1px solid var(--rule); padding-block: 5rem; }
+.prose p, .newsletter > p { margin-bottom: 1.4rem; }
+.prose p { font-size: 1.2rem; }
+.newsletter { text-align: center; }
+.newsletter form { max-width: 31rem; margin: 2rem auto 0; text-align: left; }
+.field { margin-bottom: 1.25rem; }
+label { display: block; margin-bottom: .45rem; }
+input[type="email"] { width: 100%; border: 1px solid var(--muted); border-radius: 0; padding: .7rem; background: transparent; color: var(--paper); font: inherit; }
+.consent { display: flex; align-items: flex-start; gap: .65rem; margin-bottom: 1.4rem; }
+.consent input { flex: 0 0 auto; margin-top: .34rem; accent-color: var(--brick); }
+.consent label { margin: 0; font-size: 1rem; }
+.honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.form-message { min-height: 1.6em; margin: 1.25rem 0 0; color: var(--muted); }
+.form-message.error { color: #f2b4aa; }
+.site-footer { border-top: 1px solid var(--rule); padding-block: 2rem; color: var(--muted); font-size: .9rem; text-align: center; }
+.site-footer p { margin: .2rem 0; }
+
+@media (min-width: 48rem) {
+  .hero { grid-template-columns: minmax(0, 1fr) 17rem; align-items: center; text-align: left; }
+  .hero-copy { order: 1; }
+  .cover-wrap { order: 2; }
+  .status, .hook { margin-left: 0; }
+  .actions { justify-content: flex-start; }
+}
