@@ -1,6 +1,6 @@
 /* Newsletter submission and local cover handling. */
-const supabaseUrl = "%%SUPABASE_URL%%";
-const supabaseAnonKey = "%%SUPABASE_ANON_KEY%%";
+const supabaseUrl = "https://hgwmloczvvviumbjheje.supabase.co";
+const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhnd21sb2N6dnZ2aXVtYmpoZWplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE0NjIyMTQsImV4cCI6MjEwNzAzODIxNH0.BoDiaQYeSk84Q5qUgRuWxkh_dyNSarVoXBy0xDBrm6c";
 
 const cover = document.getElementById("book-cover");
 const placeholder = document.getElementById("cover-placeholder");
