@@ -11,6 +11,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--ink); color: var(--paper); font-size: 1.125rem; line-height: 1.55; }
 a { color: inherit; }
