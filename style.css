@@ -51,13 +51,16 @@ h2 { margin-bottom: 1.75rem; font-size: clamp(2.2rem, 9vw, 3.6rem); text-align: 
 .newsletter form { max-width: 31rem; margin: 2rem auto 0; text-align: left; }
 .field { margin-bottom: 1.25rem; }
 label { display: block; margin-bottom: .45rem; }
-input[type="email"] { width: 100%; border: 1px solid var(--muted); border-radius: 0; padding: .7rem; background: transparent; color: var(--paper); font: inherit; }
+input[type="email"], input[type="text"] { width: 100%; border: 1px solid var(--muted); border-radius: 0; padding: .7rem; background: transparent; color: var(--paper); font: inherit; }
 .consent { display: flex; align-items: flex-start; gap: .65rem; margin-bottom: 1.4rem; }
 .consent input { flex: 0 0 auto; margin-top: .34rem; accent-color: var(--brick); }
 .consent label { margin: 0; font-size: 1rem; }
 .honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .form-message { min-height: 1.6em; margin: 1.25rem 0 0; color: var(--muted); }
 .form-message.error { color: #f2b4aa; }
+.arc-page .arc-copy { max-width: 46ch; margin-inline: auto; font-size: 1.15rem; }
+.arc-page .arc-copy p { margin-bottom: 1.3rem; }
+.arc-page form { max-width: 31rem; margin: 2.5rem auto 0; text-align: left; }
 .site-footer { border-top: 1px solid var(--rule); padding-block: 2rem; color: var(--muted); font-size: .9rem; text-align: center; }
 .site-footer p { margin: .2rem 0; }
 

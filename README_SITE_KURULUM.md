@@ -76,7 +76,9 @@ Prefer: return=minimal                    <-- ZORUNLU; yoksa RLS SELECT reddi 40
 - Hero: başlık, alt başlık, yazar, "Pre-order opens 23 October 2026 · Publication 24 November 2026",
   hook cümlesi (onaylı arka kapak hook'u)
 - The Book: onaylı arka kapak metni (3 paragraf, NİHAİ 26 Eyl sürümü)
-- Author: onaylı yazar biyografisi (VARYANT 1)
+- Author: **yeni yazar biyografisi** (yazar metni, 13 Eki) — SAT Metot yazarlığı, ~20 kitap çevirisi,
+  ~100 kitap editörlüğü, *Roots to Sky* ilk roman. Sitede son cümle ("More at rootstoskynovel.com.") yok
+  (ziyaretçi zaten sitede); aynı metnin tam hâli kitabın About the Author sayfasında (s. 297)
 - Newsletter: "Be told when it is out" + form
 - Footer: telif + rootstoskynovel.com
 - Harici kaynak/izleyici/pazarlama pikseli **yok**; sistem serif yazı tipi; mobil öncelikli.
