@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Unsubscribe from Roots to Sky emails.">
+    <meta name="robots" content="noindex">
+    <title>Unsubscribe — Roots to Sky</title>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav shell" aria-label="Primary navigation">
+        <a class="wordmark" href="/">ROOTS TO SKY</a>
+        <div class="nav-links">
+          <a href="/">Home</a>
+          <a href="/#book">The Book</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="section shell arc-page" aria-labelledby="unsub-title">
+        <p class="eyebrow">Email</p>
+        <h2 id="unsub-title">Unsubscribe</h2>
+        <div class="arc-copy" id="unsub-copy">
+          <p id="unsub-intro">One click and it is done. You will not be asked why, and nothing else will be sent to you.</p>
+        </div>
+
+        <form id="unsub-form" novalidate hidden>
+          <div class="field">
+            <label for="unsub-email">Email address</label>
+            <input id="unsub-email" name="email" type="email" autocomplete="email" readonly>
+          </div>
+          <button class="button" type="submit">Unsubscribe me</button>
+          <p class="form-message" id="unsub-message" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="arc-copy" id="unsub-fallback" hidden>
+          <p>This page works from the link at the bottom of one of my emails. If you no longer have it, write to
+            <a href="mailto:info@rootstoskynovel.com?subject=unsubscribe">info@rootstoskynovel.com</a> and I will remove you by hand.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell">
+        <p>&copy; 2026 Erdoğan Şemsiyeci · <a href="/">rootstoskynovel.com</a></p>
+      </div>
+    </footer>
+
+    <script src="unsub.js"></script>
+  </body>
+</html>
