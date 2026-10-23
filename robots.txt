@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /arc/
+Disallow: /unsubscribe/
+
+Sitemap: https://rootstoskynovel.com/sitemap.xml
