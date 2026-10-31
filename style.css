@@ -81,3 +81,12 @@ input[type="email"], input[type="text"] { width: 100%; border: 1px solid var(--m
 .author-links { margin-top: 1.6rem; font-size: .84rem; letter-spacing: .06em; text-transform: uppercase; }
 .author-links a { color: var(--brick); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 1px; }
 .author-links a:hover { opacity: .75; }
+
+/* Goodreads reviews widget (added 31 Oct 2026) */
+.reviews { text-align: center; }
+.reviews-note { max-width: 42rem; margin: 0 auto 2.2rem; color: var(--muted); font-size: 1rem; }
+.gr-widget { width: 100%; max-width: 565px; margin-inline: auto; padding: 1.1rem; background: #fff; border: 1px solid var(--rule); text-align: left; }
+.gr-widget iframe { display: block; width: 100%; max-width: 100%; height: 420px; border: 0; background: #fff; }
+.reviews-cta { margin: 1.6rem 0 0; font-size: .84rem; letter-spacing: .06em; text-transform: uppercase; }
+.reviews-cta a { color: var(--brick); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+.reviews-cta a:hover { opacity: .75; }
