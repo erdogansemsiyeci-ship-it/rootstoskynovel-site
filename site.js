@@ -1,77 +1,124 @@
-/* Newsletter submission and local cover handling. */
-const supabaseUrl = "https://hgwmloczvvviumbjheje.supabase.co";
-const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhnd21sb2N6dnZ2aXVtYmpoZWplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE0NjIyMTQsImV4cCI6MjEwNzAzODIxNH0.BoDiaQYeSk84Q5qUgRuWxkh_dyNSarVoXBy0xDBrm6c";
+(function () {
+  var cfg = window.SITE_CONFIG || { links: {} };
 
-const cover = document.getElementById("book-cover");
-const placeholder = document.getElementById("cover-placeholder");
-const coverCheck = new Image();
-coverCheck.onload = () => {
-  cover.hidden = false;
-  placeholder.hidden = true;
-};
-coverCheck.src = cover.src;
+  // Outbound links: fill from config, hide the ones that are empty.
+  document.querySelectorAll('[data-link]').forEach(function (a) {
+    var url = (cfg.links || {})[a.getAttribute('data-link')];
+    if (url) { a.href = url; a.target = '_blank'; a.rel = 'noopener'; }
+    else { a.hidden = true; }
+  });
 
-["preorder-link", "goodreads-link"].forEach((id) => {
-  const link = document.getElementById(id);
-  if (link && !link.getAttribute("href").includes("%%")) link.hidden = false;
-});
+  // Image fallbacks: if the cover or portrait file is missing, show the placeholder.
+  document.querySelectorAll('[data-fallback]').forEach(function (box) {
+    var img = box.querySelector('img');
+    if (!img) return;
+    var fail = function () { box.classList.add('no-img'); };
+    if (img.complete && img.naturalWidth === 0) fail();
+    img.addEventListener('error', fail);
+  });
 
-const form = document.getElementById("newsletter-form");
-const message = document.getElementById("form-message");
-const submitButton = form.querySelector('button[type="submit"]');
-const defaultButtonText = submitButton.textContent;
-
-function showMessage(text, isError = false) {
-  message.textContent = text;
-  message.classList.toggle("error", isError);
-}
-
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const email = form.elements.email.value.trim().toLowerCase();
-  const consent = form.elements.consent.checked;
-  const honeypot = form.elements.website.value;
-
-  if (!consent) {
-    showMessage("Please tick the box so we may write to you.", true);
-    return;
-  }
-  if (!form.elements.email.validity.valid) {
-    form.elements.email.reportValidity();
-    return;
-  }
-  if (honeypot) {
-    showMessage("Thank you — you are on the list.");
-    form.reset();
-    return;
-  }
-
-  submitButton.disabled = true;
-  submitButton.textContent = "Sending…";
-  showMessage("");
-  try {
-    const response = await fetch(`${supabaseUrl}/rest/v1/rts_subscribers`, {
-      method: "POST",
-      headers: {
-        apikey: supabaseAnonKey,
-        Authorization: `Bearer ${supabaseAnonKey}`,
-        "Content-Type": "application/json",
-        Prefer: "return=minimal"
-      },
-      body: JSON.stringify({ eposta: email, kaynak: "site" })
-    });
-    if (response.status === 200 || response.status === 201) {
-      showMessage("Thank you — you are on the list.");
-      form.reset();
-    } else if (response.status === 409) {
-      showMessage("You are already on the list.");
-    } else {
-      showMessage("That did not go through. Please try again.", true);
+  var MESSAGES = {
+    early: {
+      ok: ['ok', 'Thank you. Your request is in — I will write to this address about the early copy.'],
+      dup: ['ok', 'You have already asked for an early copy. Nothing more to do.'],
+      check_email: ['ok', 'Almost there. Check your inbox and click the link to confirm.'],
+      full: ['err', 'The 100 early copies have gone. Join the newsletter below and you will hear from me on release day.'],
+      invalid: ['err', 'Please enter a valid email address and tick the box to agree.'],
+      error: ['err', 'Something went wrong. Please try again in a moment.'],
+      unconfigured: ['err', 'This form is not connected yet.']
+    },
+    news: {
+      ok: ['ok', 'Thank you. You are on the list.'],
+      dup: ['ok', 'You are already on the list.'],
+      check_email: ['ok', 'Thank you. Check your inbox to confirm your subscription.'],
+      full: ['ok', 'Thank you. You are on the list.'],
+      invalid: ['err', 'Please enter a valid email address and tick the box to agree.'],
+      error: ['err', 'Something went wrong. Please try again in a moment.'],
+      unconfigured: ['err', 'This form is not connected yet.']
     }
-  } catch (error) {
-    showMessage("That did not go through. Please try again.", true);
-  } finally {
-    submitButton.disabled = false;
-    submitButton.textContent = defaultButtonText;
+  };
+
+  // Direct Supabase insert (project decision 8 Oct 2026: no external service is exposed).
+  // rts_arc.kaynak only accepts booksirens | kisisel | diaspora | bookstagram | youtube.
+  var TABLES = {
+    early: { table: 'rts_arc', kaynak: 'kisisel' },
+    news: { table: 'rts_subscribers', kaynak: 'site' }
+  };
+
+  function postSupabase(kind, email, source) {
+    var sb = cfg.supabase || {};
+    if (!sb.url || !sb.key) return Promise.reject(new Error('supabase yok'));
+    var t = TABLES[kind];
+    var body = kind === 'early'
+      ? { ad: '', eposta: email, kaynak: t.kaynak, notlar: 'site formu | kaynak: ' + source + ' | consent: true' }
+      : { eposta: email, kaynak: t.kaynak };
+    return fetch(sb.url + '/rest/v1/' + t.table, {
+      method: 'POST',
+      headers: {
+        apikey: sb.key,
+        Authorization: 'Bearer ' + sb.key,
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal'
+      },
+      body: JSON.stringify(body)
+    }).then(function (r) {
+      if (r.status === 201 || r.status === 200) return 'ok';
+      if (r.status === 409) return 'dup';
+      throw new Error('HTTP ' + r.status);
+    });
   }
-});
+
+  function postWebhook(url, kind, email, hp, source) {
+    return fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, consent: true, source: source, hp: hp })
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (d) { return (d && d.status) || 'error'; });
+  }
+
+  document.querySelectorAll('form[data-form]').forEach(function (form) {
+    var kind = form.getAttribute('data-form'); // "early" | "news"
+    var msg = form.querySelector('.msg');
+    var btn = form.querySelector('button[type=submit]');
+    var msgs = MESSAGES[kind];
+
+    function show(key) {
+      var m = msgs[key] || msgs.error;
+      msg.className = 'msg ' + m[0];
+      msg.textContent = m[1];
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = (form.elements.email.value || '').trim().toLowerCase();
+      var consent = form.elements.consent.checked;
+      var hp = form.elements.hp ? form.elements.hp.value : '';
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !consent) { show('invalid'); return; }
+
+      // Honeypot: a bot filled the hidden field. Pretend success, store nothing.
+      if (hp) { show('ok'); form.reset(); return; }
+
+      var source = location.hostname + (kind === 'early' ? '/#readers' : '/#newsletter');
+      var useSupabase = !!(cfg.supabase && cfg.supabase.url && cfg.supabase.key);
+      var url = kind === 'early' ? cfg.earlyCopyUrl : cfg.newsletterUrl;
+      if (!useSupabase && !url) { show('unconfigured'); return; }
+
+      btn.disabled = true;
+      msg.className = 'msg'; msg.textContent = '';
+
+      var task = useSupabase
+        ? postSupabase(kind, email, source)
+        : postWebhook(url, kind, email, hp, source);
+
+      task
+        .then(function (status) {
+          show(status);
+          if (status === 'ok' || status === 'check_email') form.reset();
+        })
+        .catch(function () { show('error'); })
+        .then(function () { btn.disabled = false; });
+    });
+  });
+})();
