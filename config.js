@@ -6,11 +6,16 @@ window.SITE_CONFIG = {
   earlyCopyUrl: "",
   newsletterUrl: "",
 
-  // Supabase project (anon key, INSERT only — safe to publish).
+  // Supabase project (anon key, INSERT + flag read only — safe to publish).
   supabase: {
     url: "https://hgwmloczvvviumbjheje.supabase.co",
     key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imhnd21sb2N6dnZ2aXVtYmpoZWplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE0NjIyMTQsImV4cCI6MjEwNzAzODIxNH0.BoDiaQYeSk84Q5qUgRuWxkh_dyNSarVoXBy0xDBrm6c"
   },
+
+  // Goodreads reviews widget. Mounted only after the first review exists
+  // (flag rts_site_flags.reviews_live). Colours follow the site palette:
+  // links=teal #17606B, stars=amber #E3AE72, text=body #2B3F47, review_back=band #E6ECE9.
+  reviewsWidgetUrl: "https://www.goodreads.com/api/reviews_widget_iframe?did=DEVELOPER_ID&format=html&header_text=Reader+reviews+for+Roots+to+Sky&isbn=9798161969397&links=17606B&review_back=E6ECE9&stars=E3AE72&text=2B3F47",
 
   // Outbound links
   links: {

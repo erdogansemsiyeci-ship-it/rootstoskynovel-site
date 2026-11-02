@@ -72,3 +72,21 @@ The page is live as designed. Deviations from the handoff, and why:
 5. **Open item:** the 100-copy cap is not enforced (the anon key cannot count rows) and ARC delivery
    (`arc_file_url` / `arc_delivery` in `rts_config`) is still empty, so early-copy requests are collected but the
    PDF email cannot go out yet.
+
+## Reader reviews section — how it works (added 2 November 2026)
+
+The Goodreads widget is **not** mounted unconditionally. An empty widget ("No reviews found.") would look
+unfinished, so the section ships a designed empty state and `site.js` swaps in the iframe only when there is
+something to show:
+
+- Flag table `rts_site_flags` (public read through the anon key): `reviews_live` = `true|false`, `reviews_count`.
+- `config.js` → `reviewsWidgetUrl` holds the widget URL. Colours are passed as query parameters and are the only
+  thing about a Goodreads widget that can be styled:
+  `links=17606B` (teal), `stars=E3AE72` (amber), `text=2B3F47` (body), `review_back=E6ECE9` (salt-2 band).
+  Typography and the "Write a review" button inside the iframe stay Goodreads' own and cannot be changed.
+- Refresh job: `~/rootstosky-os/scripts/rts_reviews_flag.py` (cron `rts-reviews-flag`, every 6 hours). It fetches
+  the widget, looks for `No reviews found.`, and flips the flag. Silent when nothing changed.
+- When the widget mounts, `site.js` hides the left-hand "Read or write a review" button (`#rev-cta`) so the page
+  does not show two identical calls to action.
+- Tested both states locally: flag false → empty state, CTA visible, no iframe; flag true → iframe 420 px,
+  empty state removed, CTA hidden. Flag left at `false` (0 reviews on 2 November).

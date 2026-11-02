@@ -30,6 +30,7 @@
       <div class="nav-links">
         <a href="#book">The Book</a>
         <a href="#readers">Readers</a>
+        <a href="#reviews">Reviews</a>
         <a href="#author">Author</a>
         <a href="#newsletter">Newsletter</a>
         <a class="btn btn-amber btn-sm" data-link="amazon" href="#">Pre-order</a>
@@ -123,8 +124,26 @@
           </div>
           <p class="msg" role="status" aria-live="polite"></p>
         </form>
-        <div class="btn-row">
-          <a class="btn btn-line" data-link="goodreadsBook" href="#">Read or write a review</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" class="reviews">
+    <div class="wrap">
+      <div class="rev-grid">
+        <div class="stack" style="gap:12px">
+          <p class="eyebrow">What readers say</p>
+          <h2 class="rev-h">Reader reviews</h2>
+          <p class="lead" style="max-width:30em">Live from Goodreads. Early copies are with a first circle of readers; the first reviews will appear here as they are posted.</p>
+          <div class="btn-row" style="margin-top:10px" id="rev-cta">
+            <a class="btn btn-line" data-link="goodreadsBook" href="#">Read or write a review</a>
+          </div>
+        </div>
+        <div class="gr-card" id="gr-reviews-card">
+          <!-- The Goodreads widget is injected by site.js only once the first review exists
+               (flag: rts_site_flags.reviews_live, refreshed by a Hermes job). Until then a
+               designed empty state holds the column, so nothing looks broken or bare. -->
+          <p class="rev-empty" id="gr-reviews-empty">The first reviews will appear here as early readers finish. An honest review on Goodreads helps the next reader more than anything.</p>
         </div>
       </div>
     </div>

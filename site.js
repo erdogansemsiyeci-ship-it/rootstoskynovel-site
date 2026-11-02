@@ -17,6 +17,36 @@
     img.addEventListener('error', fail);
   });
 
+  // Goodreads reviews: the widget is only mounted once at least one review exists.
+  // The flag lives in rts_site_flags (public read) and is refreshed by a Hermes job;
+  // before that a designed empty state holds the column.
+  (function () {
+    var card = document.getElementById('gr-reviews-card');
+    var sb = cfg.supabase || {};
+    if (!card || !cfg.reviewsWidgetUrl || !sb.url || !sb.key) return;
+    fetch(sb.url + '/rest/v1/rts_site_flags?key=eq.reviews_live&select=value', {
+      headers: { apikey: sb.key, Authorization: 'Bearer ' + sb.key }
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (rows) {
+        if (!rows || !rows[0] || rows[0].value !== 'true') return;
+        var f = document.createElement('iframe');
+        f.src = cfg.reviewsWidgetUrl;
+        f.title = 'Goodreads reviews for Roots to Sky';
+        f.loading = 'lazy';
+        f.width = 565;
+        f.height = 420;
+        f.setAttribute('frameborder', '0');
+        f.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox');
+        card.innerHTML = '';
+        card.appendChild(f);
+        // the widget brings its own "Write a review" action; hide the duplicate CTA
+        var cta = document.getElementById('rev-cta');
+        if (cta) cta.hidden = true;
+      })
+      .catch(function () { /* offline or blocked: keep the empty state */ });
+  })();
+
   var MESSAGES = {
     early: {
       ok: ['ok', 'Thank you. Your request is in — I will write to this address about the early copy.'],
