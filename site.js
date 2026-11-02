@@ -75,13 +75,30 @@
     news: { table: 'rts_subscribers', kaynak: 'site' }
   };
 
+  // UTM: YouTube trafigi ayri sayilir. rts_arc.kaynak yalniz
+  // booksirens|kisisel|diaspora|bookstagram|youtube kabul eder; rts_subscribers
+  // site|arc|youtube. utm_source=youtube -> kaynak='youtube'.
+  function utm() {
+    var q = new URLSearchParams(location.search);
+    return {
+      source: (q.get('utm_source') || '').toLowerCase(),
+      medium: (q.get('utm_medium') || '').toLowerCase(),
+      campaign: (q.get('utm_campaign') || '').toLowerCase()
+    };
+  }
+
   function postSupabase(kind, email, source) {
     var sb = cfg.supabase || {};
     if (!sb.url || !sb.key) return Promise.reject(new Error('supabase yok'));
     var t = TABLES[kind];
+    var u = utm();
+    var fromYoutube = u.source === 'youtube';
+    var kaynak = fromYoutube ? 'youtube' : t.kaynak;
     var body = kind === 'early'
-      ? { ad: '', eposta: email, kaynak: t.kaynak, notlar: 'site formu | kaynak: ' + source + ' | consent: true' }
-      : { eposta: email, kaynak: t.kaynak };
+      ? { ad: '', eposta: email, kaynak: kaynak,
+          notlar: 'site formu | kaynak: ' + source + ' | consent: true' +
+                  (fromYoutube ? ' | utm: ' + [u.source, u.medium, u.campaign].join('/') : '') }
+      : { eposta: email, kaynak: kaynak };
     return fetch(sb.url + '/rest/v1/' + t.table, {
       method: 'POST',
       headers: {
