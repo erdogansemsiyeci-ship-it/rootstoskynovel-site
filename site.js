@@ -47,7 +47,7 @@
       .catch(function () { /* offline or blocked: keep the empty state */ });
   })();
 
-  var MESSAGES = {
+  var MESSAGES_EN = {
     early: {
       ok: ['ok', 'Thank you. Your request is in — I will write to this address about the early copy.'],
       dup: ['ok', 'You have already asked for an early copy. Nothing more to do.'],
@@ -67,6 +67,31 @@
       unconfigured: ['err', 'This form is not connected yet.']
     }
   };
+
+  // Turkce sayfa (/tr/) icin mesajlar. Secim <html lang> ile yapilir.
+  var MESSAGES_TR = {
+    early: {
+      ok: ['ok', 'Tesekkurler. Talebiniz alindi; erken kopya icin bu adrese yazacagim.'],
+      dup: ['ok', 'Erken kopya talebiniz zaten kayitli. Yapacak bir sey yok.'],
+      check_email: ['ok', 'Neredeyse hazir. Gelen kutunuzu kontrol edip baglantiya tiklayin.'],
+      full: ['ok', 'Erken kopyalar tukendi. Asagidaki listeye katilirsaniz yayimlandiginda haber veririm.'],
+      invalid: ['err', 'Gecerli bir e-posta adresi girin ve onay kutusunu isaretleyin.'],
+      error: ['err', 'Bir sorun olustu. Lutfen birazdan tekrar deneyin.'],
+      unconfigured: ['err', 'Bu form henuz bagli degil.']
+    },
+    news: {
+      ok: ['ok', 'Tesekkurler. Listeye eklendiniz.'],
+      dup: ['ok', 'Zaten listedesiniz.'],
+      check_email: ['ok', 'Tesekkurler. Aboneligi onaylamak icin gelen kutunuzu kontrol edin.'],
+      full: ['ok', 'Tesekkurler. Listeye eklendiniz.'],
+      invalid: ['err', 'Gecerli bir e-posta adresi girin ve onay kutusunu isaretleyin.'],
+      error: ['err', 'Bir sorun olustu. Lutfen birazdan tekrar deneyin.'],
+      unconfigured: ['err', 'Bu form henuz bagli degil.']
+    }
+  };
+
+  var MESSAGES = ((document.documentElement.lang || 'en').toLowerCase().indexOf('tr') === 0)
+    ? MESSAGES_TR : MESSAGES_EN;
 
   // Direct Supabase insert (project decision 8 Oct 2026: no external service is exposed).
   // rts_arc.kaynak only accepts booksirens | kisisel | diaspora | bookstagram | youtube.
@@ -98,7 +123,8 @@
       ? { ad: '', eposta: email, kaynak: kaynak,
           notlar: 'site formu | kaynak: ' + source + ' | consent: true' +
                   (fromYoutube ? ' | utm: ' + [u.source, u.medium, u.campaign].join('/') : '') }
-      : { eposta: email, kaynak: kaynak };
+      : { eposta: email, kaynak: kaynak,
+          dil: ((document.documentElement.lang || 'en').toLowerCase().indexOf('tr') === 0 ? 'tr' : 'en') };
     return fetch(sb.url + '/rest/v1/' + t.table, {
       method: 'POST',
       headers: {
