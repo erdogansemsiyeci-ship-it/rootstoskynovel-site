@@ -47,6 +47,31 @@
       .catch(function () { /* offline or blocked: keep the empty state */ });
   })();
 
+  // Goodreads giveaway: the widget only tells the truth while the draw is open.
+  // It closes 23 Nov 2026, 11:59pm PT (= 24 Nov 07:59 UTC). After that the whole
+  // section is removed rather than left as a box advertising a finished draw.
+  (function () {
+    var sec = document.getElementById('giveaway');
+    if (!sec) return;
+    var closesAt = Date.parse('2026-11-24T07:59:00Z');
+    if (Date.now() > closesAt) {
+      sec.remove();
+      document.querySelectorAll('.nav-links a[href="#giveaway"], .nav a[href="#giveaway"]')
+        .forEach(function (a) { a.remove(); });
+      return;
+    }
+    // If Goodreads' script is blocked (ad blocker, offline) the box stays empty.
+    // Fall back to a plain link so the section never looks broken.
+    var box = document.getElementById('goodreadsGiveawayWidget455663');
+    if (!box) return;
+    setTimeout(function () {
+      if (box.innerHTML.trim().length < 200) {
+        box.innerHTML = '<p style="font-size:15px;line-height:1.6;margin:0 0 14px">The giveaway box could not load here. You can still enter on Goodreads.</p>' +
+          '<a class="btn btn-line" href="https://www.goodreads.com/giveaway/show/455663" target="_blank" rel="noopener">Enter the giveaway on Goodreads</a>';
+      }
+    }, 5000);
+  })();
+
   var MESSAGES_EN = {
     early: {
       ok: ['ok', 'Thank you. Your request is in — I will write to this address about the early copy.'],

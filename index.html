@@ -32,6 +32,7 @@
       <a class="brand" href="#top">Roots to Sky</a>
       <div class="nav-links">
         <a href="#book">The Book</a>
+        <a href="#giveaway">Giveaway</a>
         <a href="#readers">Readers</a>
         <a href="#reviews">Reviews</a>
         <a href="#author">Author</a>
@@ -100,6 +101,25 @@
       <div class="btn-row">
         <a class="btn btn-teal" data-link="amazon" href="#">Pre-order on Amazon</a>
         <a class="btn btn-line" data-link="goodreadsBook" href="#">Add on Goodreads</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="giveaway" class="giveaway" aria-labelledby="gw-h">
+    <div class="wrap two">
+      <div class="stack">
+        <p class="eyebrow">Goodreads giveaway</p>
+        <h2 id="gw-h" class="h2" style="font-size:clamp(32px,4vw,52px)">Win a Kindle copy</h2>
+        <p class="lead" style="max-width:34em">One hundred Kindle editions are being given away on Goodreads. Entry is free and takes a moment. The draw closes on 23 November, the day before release, and the winners are notified by Goodreads.</p>
+        <p style="font-size:14px;line-height:1.6;color:var(--muted);max-width:34em">A Goodreads account is all you need. No purchase, no email to me — the entry stays on Goodreads.</p>
+      </div>
+      <div class="gw-card">
+        <!-- Live Goodreads giveaway widget (draw 455663). site.js removes this whole
+             section after the draw closes, so no dead box is ever left behind. -->
+        <div id="goodreadsGiveawayWidget455663"></div>
+        <noscript>
+          <p><a class="btn btn-line" href="https://www.goodreads.com/giveaway/show/455663" rel="noopener">Enter the giveaway on Goodreads</a></p>
+        </noscript>
       </div>
     </div>
   </section>
@@ -207,5 +227,8 @@
 
 <script src="config.js"></script>
 <script src="site.js"></script>
+<!-- Goodreads giveaway widget. It replaces the placeholder div above by id,
+     so this must load after that div. -->
+<script src="https://www.goodreads.com/giveaway/widget/455663" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>

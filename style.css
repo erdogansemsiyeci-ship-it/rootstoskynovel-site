@@ -84,6 +84,15 @@ section{padding:clamp(64px,9vw,128px) var(--pad)}
 .editions p{font-size:16px;line-height:1.6;color:var(--text)}
 .btn-row{display:flex;flex-wrap:wrap;gap:16px}
 
+/* Goodreads giveaway band. The widget brings its own inline styling and sits on white;
+   it is kept as-is so it reads as Goodreads, not as us. */
+.giveaway{border-top:1px solid var(--rule);padding-block:clamp(48px,6vw,80px)}
+.giveaway .two{align-items:start}
+.gw-card{max-width:400px;width:100%;justify-self:start}
+.gw-card .goodreadsGiveawayWidget{max-width:100% !important;margin:0 !important}
+/* keep Goodreads' date stamp from breaking into "(November 23, / 2026)" */
+.gw-card .goodreadsGiveawayWidget .giveaway-status span{white-space:nowrap}
+
 .comps{font:300 clamp(34px,4vw,54px)/1.15 var(--serif)}
 .lead{font-size:17px;line-height:1.65;color:var(--text);max-width:28em}
 .firsts{border-top:1px solid var(--rule);padding-top:28px}
