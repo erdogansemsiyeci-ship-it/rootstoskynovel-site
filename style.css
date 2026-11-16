@@ -78,6 +78,12 @@ section{padding:clamp(64px,9vw,128px) var(--pad)}
 .route small{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 .route span{font:500 34px var(--serif)}
 
+/* TR: kitap bölümü kolaj görselleri */
+.book-band{margin-top:clamp(40px,6vw,72px)}
+.book-band img{width:100%;height:auto;display:block;border:1px solid var(--rule)}
+.route-img img{width:100%;height:auto;display:block;border:1px solid var(--rule);margin-bottom:12px}
+.route-img span{font:500 26px var(--serif)}
+
 .editions{background:var(--salt-2);padding:clamp(48px,6vw,80px) var(--pad)}
 .editions .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:32px 48px;align-items:center}
 .editions h2{font:500 36px/1.1 var(--serif)}
