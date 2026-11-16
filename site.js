@@ -107,22 +107,22 @@
   // Turkce sayfa (/tr/) icin mesajlar. Secim <html lang> ile yapilir.
   var MESSAGES_TR = {
     early: {
-      ok: ['ok', 'Tesekkurler. Talebiniz alindi; erken kopya icin bu adrese yazacagim.'],
-      dup: ['ok', 'Erken kopya talebiniz zaten kayitli. Yapacak bir sey yok.'],
-      check_email: ['ok', 'Neredeyse hazir. Gelen kutunuzu kontrol edip baglantiya tiklayin.'],
-      full: ['ok', 'Erken kopyalar tukendi. Asagidaki listeye katilirsaniz yayimlandiginda haber veririm.'],
-      invalid: ['err', 'Gecerli bir e-posta adresi girin ve onay kutusunu isaretleyin.'],
-      error: ['err', 'Bir sorun olustu. Lutfen birazdan tekrar deneyin.'],
-      unconfigured: ['err', 'Bu form henuz bagli degil.']
+      ok: ['ok', 'Teşekkürler. Talebiniz alındı; erken kopya için bu adrese yazacağım.'],
+      dup: ['ok', 'Erken kopya talebiniz zaten kayıtlı. Yapacak bir şey yok.'],
+      check_email: ['ok', 'Neredeyse hazır. Gelen kutunuzu kontrol edip bağlantıya tıklayın.'],
+      full: ['ok', 'Erken kopyalar tükendi. Aşağıdaki listeye katılırsanız yayımlandığında haber veririm.'],
+      invalid: ['err', 'Geçerli bir e-posta adresi girin ve onay kutusunu işaretleyin.'],
+      error: ['err', 'Bir sorun oluştu. Lütfen birazdan tekrar deneyin.'],
+      unconfigured: ['err', 'Bu form henüz bağlı değil.']
     },
     news: {
-      ok: ['ok', 'Tesekkurler. Listeye eklendiniz.'],
+      ok: ['ok', 'Teşekkürler. Listeye eklendiniz.'],
       dup: ['ok', 'Zaten listedesiniz.'],
-      check_email: ['ok', 'Tesekkurler. Aboneligi onaylamak icin gelen kutunuzu kontrol edin.'],
-      full: ['ok', 'Tesekkurler. Listeye eklendiniz.'],
-      invalid: ['err', 'Gecerli bir e-posta adresi girin ve onay kutusunu isaretleyin.'],
-      error: ['err', 'Bir sorun olustu. Lutfen birazdan tekrar deneyin.'],
-      unconfigured: ['err', 'Bu form henuz bagli degil.']
+      check_email: ['ok', 'Teşekkürler. Aboneliği onaylamak için gelen kutunuzu kontrol edin.'],
+      full: ['ok', 'Teşekkürler. Listeye eklendiniz.'],
+      invalid: ['err', 'Geçerli bir e-posta adresi girin ve onay kutusunu işaretleyin.'],
+      error: ['err', 'Bir sorun oluştu. Lütfen birazdan tekrar deneyin.'],
+      unconfigured: ['err', 'Bu form henüz bağlı değil.']
     }
   };
 
