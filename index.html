@@ -7,28 +7,39 @@
 <meta name="description" content="Roots to Sky: When the Soul Remembers. A novel of salt, coffee, and what the soul remembers when the mind refuses. Out 24 November 2026.">
 <link rel="canonical" href="https://rootstoskynovel.com/">
 <script>
-/* Ülke bazlı dil yönlendirmesi: Türkiye'den gelen ziyaretçi /tr/ sayfasına alınır.
-   Kurallar: (1) EN'i elle seçmiş olan (rts_lang=en çerezi) asla yönlendirilmez,
-   (2) arama motoru / sosyal önizleme botları yönlendirilmez (SEO), (3) servis
-   1,5 sn içinde cevap vermezse hiçbir şey olmaz — sayfa İngilizce kalır. */
+/* Ülke/dil bazlı yönlendirme: Türkiye'den gelen ziyaretçi /tr/ sayfasına alınır.
+   1) Tarayıcı dili Türkçe ise ANINDA yönlendirir (ağ beklemez — IP servisi
+      engelliyse ya da VPN/iCloud Relay ülkeyi yanlış gösteriyorsa da çalışır).
+   2) Değilse IP ülkesine bakar (iki ayrı servis, biri cevap vermezse diğeri).
+   3) EN'i elle seçmiş olan (rts_lang=en çerezi) ve botlar asla yönlendirilmez. */
 (function () {
   try {
     var pref = document.cookie.match(/(?:^|;\s*)rts_lang=([^;]+)/);
     if (pref && pref[1] === 'en') return;
     var ua = navigator.userAgent || '';
     if (/bot|crawl|spider|slurp|baidu|yandex|facebookexternalhit|embedly|preview|headless|https?-get/i.test(ua)) return;
+    var goTR = function () { location.replace('/tr/'); };
+    var langs = navigator.languages || [navigator.language || ''];
+    for (var i = 0; i < langs.length; i++) {
+      if (/^tr\b/i.test(langs[i] || '')) { goTR(); return; }
+    }
     if (!window.fetch) return;
     var done = false;
-    var timer = setTimeout(function () { done = true; }, 1500);
+    var timer = setTimeout(function () { done = true; }, 2000);
+    var hit = function (c) {
+      if (done || !c) return;
+      if (c === 'TR') { done = true; goTR(); }
+    };
     fetch('https://api.country.is/', { cache: 'no-store' })
       .then(function (r) { return r.json(); })
-      .then(function (d) {
-        clearTimeout(timer);
-        if (done || !d || d.country !== 'TR') return;
-        done = true;
-        location.replace('/tr/');
+      .then(function (d) { if (d && d.country) hit(d.country); else throw 0; })
+      .catch(function () {
+        return fetch('https://ipwho.is/', { cache: 'no-store' })
+          .then(function (r) { return r.json(); })
+          .then(function (d) { if (d && d.country_code) hit(d.country_code); })
+          .catch(function () {});
       })
-      .catch(function () { clearTimeout(timer); });
+      .then(function () { clearTimeout(timer); });
   } catch (e) {}
 })();
 </script>
