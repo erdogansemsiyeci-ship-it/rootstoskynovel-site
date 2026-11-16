@@ -1,6 +1,17 @@
 (function () {
   var cfg = window.SITE_CONFIG || { links: {} };
 
+  // Dil tercihini hatırla: EN/TR bağlantısına elle basıldıysa ülke bazlı
+  // otomatik yönlendirme bir daha devreye girmez (index.html'deki script okur).
+  document.querySelectorAll('a[hreflang]').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var l = a.getAttribute('hreflang');
+      if (l === 'en' || l === 'tr') {
+        document.cookie = 'rts_lang=' + l + ';path=/;max-age=31536000;SameSite=Lax';
+      }
+    });
+  });
+
   // Outbound links: fill from config, hide the ones that are empty.
   document.querySelectorAll('[data-link]').forEach(function (a) {
     var url = (cfg.links || {})[a.getAttribute('data-link')];
@@ -127,7 +138,8 @@
 
   // UTM: YouTube trafigi ayri sayilir. rts_arc.kaynak yalniz
   // booksirens|kisisel|diaspora|bookstagram|youtube kabul eder; rts_subscribers
-  // site|arc|youtube. utm_source=youtube -> kaynak='youtube'.
+  // site|arc|youtube|podia. utm_source=youtube -> 'youtube', utm_source=podia -> 'podia'
+  // (podia = Podia duyurusundan gelen TR okur; yalniz haber listesinde gecerli).
   function utm() {
     var q = new URLSearchParams(location.search);
     return {
@@ -143,7 +155,8 @@
     var t = TABLES[kind];
     var u = utm();
     var fromYoutube = u.source === 'youtube';
-    var kaynak = fromYoutube ? 'youtube' : t.kaynak;
+    var fromPodia = kind === 'news' && u.source === 'podia';
+    var kaynak = fromYoutube ? 'youtube' : (fromPodia ? 'podia' : t.kaynak);
     var body = kind === 'early'
       ? { ad: '', eposta: email, kaynak: kaynak,
           notlar: 'site formu | kaynak: ' + source + ' | consent: true' +

@@ -6,6 +6,32 @@
 <title>Roots to Sky: When the Soul Remembers — a novel by Erdoğan Şemsiyeci</title>
 <meta name="description" content="Roots to Sky: When the Soul Remembers. A novel of salt, coffee, and what the soul remembers when the mind refuses. Out 24 November 2026.">
 <link rel="canonical" href="https://rootstoskynovel.com/">
+<script>
+/* Ülke bazlı dil yönlendirmesi: Türkiye'den gelen ziyaretçi /tr/ sayfasına alınır.
+   Kurallar: (1) EN'i elle seçmiş olan (rts_lang=en çerezi) asla yönlendirilmez,
+   (2) arama motoru / sosyal önizleme botları yönlendirilmez (SEO), (3) servis
+   1,5 sn içinde cevap vermezse hiçbir şey olmaz — sayfa İngilizce kalır. */
+(function () {
+  try {
+    var pref = document.cookie.match(/(?:^|;\s*)rts_lang=([^;]+)/);
+    if (pref && pref[1] === 'en') return;
+    var ua = navigator.userAgent || '';
+    if (/bot|crawl|spider|slurp|baidu|yandex|facebookexternalhit|embedly|preview|headless|https?-get/i.test(ua)) return;
+    if (!window.fetch) return;
+    var done = false;
+    var timer = setTimeout(function () { done = true; }, 1500);
+    fetch('https://api.country.is/', { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        clearTimeout(timer);
+        if (done || !d || d.country !== 'TR') return;
+        done = true;
+        location.replace('/tr/');
+      })
+      .catch(function () { clearTimeout(timer); });
+  } catch (e) {}
+})();
+</script>
 <link rel="alternate" hreflang="en" href="https://rootstoskynovel.com/">
 <link rel="alternate" hreflang="tr" href="https://rootstoskynovel.com/tr/">
 <link rel="alternate" hreflang="x-default" href="https://rootstoskynovel.com/">
