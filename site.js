@@ -160,7 +160,7 @@
     var body = kind === 'early'
       ? { ad: '', eposta: email, kaynak: kaynak,
           notlar: 'site formu | kaynak: ' + source + ' | consent: true' +
-                  (fromYoutube ? ' | utm: ' + [u.source, u.medium, u.campaign].join('/') : '') }
+                  (u.source ? ' | utm: ' + [u.source, u.medium, u.campaign].join('/') : '') }
       : { eposta: email, kaynak: kaynak,
           dil: ((document.documentElement.lang || 'en').toLowerCase().indexOf('tr') === 0 ? 'tr' : 'en') };
     return fetch(sb.url + '/rest/v1/' + t.table, {
