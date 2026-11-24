@@ -62,12 +62,15 @@
   // It closes 23 Nov 2026, 11:59pm PT (= 24 Nov 07:59 UTC). After that the whole
   // section is removed rather than left as a box advertising a finished draw.
   (function () {
-    var sec = document.getElementById('giveaway');
-    if (!sec) return;
+    // EN bölümü #giveaway, TR bölümü #cekilis — ikisi de aynı çekilişe bağlı.
+    var secs = [document.getElementById('giveaway'), document.getElementById('cekilis')]
+      .filter(function (el) { return !!el; });
+    if (!secs.length) return;
     var closesAt = Date.parse('2026-11-24T07:59:00Z');
     if (Date.now() > closesAt) {
-      sec.remove();
-      document.querySelectorAll('.nav-links a[href="#giveaway"], .nav a[href="#giveaway"]')
+      secs.forEach(function (el) { el.remove(); });
+      document.querySelectorAll('.nav-links a[href="#giveaway"], .nav a[href="#giveaway"], ' +
+        '.nav-links a[href="#cekilis"], .nav a[href="#cekilis"]')
         .forEach(function (a) { a.remove(); });
       return;
     }
