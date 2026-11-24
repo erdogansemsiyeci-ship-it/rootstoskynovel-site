@@ -19,7 +19,7 @@ window.SITE_CONFIG = {
 
   // Outbound links
   links: {
-    amazon: "https://www.amazon.com/dp/B0HNQYGJZV",                     // Kindle edition / pre-order
+    amazon: "https://www.amazon.com/dp/B0HNQYGJZV",                     // Kindle edition
     goodreadsBook: "https://www.goodreads.com/book/show/262037465-roots-to-sky",
     amazonAuthor: "https://www.amazon.com/stores/author/B0HNTGT7TY",
     goodreadsAuthor: "https://www.goodreads.com/author/show/54356142.Erdogan_Semsiyeci",
